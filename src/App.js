@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import Form from "./components/form.js";
+import AlertMessage from "./components/alertMessage.js";
 
 const App = () => {
   const [firstName, setFirstName] = useState("");
@@ -49,97 +51,23 @@ const App = () => {
     <main className="form-container">
       <h2>Contact Us</h2>
 
-      {successMessage && (
-        <section className="alert">Form submitted successfully!</section>
-      )}
+      {successMessage && <AlertMessage message="Form submitted successfully!" />}
 
-      <form onSubmit={handleSubmit}>
-        <fieldset className="name-container">
-          <div>
-            <label htmlFor="first-name">First Name *</label>
-            <input
-              type="text"
-              id="first-name"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              required
-            />
-          </div>
-
-          <div>
-            <label htmlFor="last-name">Last Name *</label>
-            <input
-              type="text"
-              id="last-name"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              required
-            />
-          </div>
-        </fieldset>
-
-        <section>
-          <label htmlFor="email">Email Address *</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </section>
-
-        <fieldset className="radio-group">
-          <legend>Query Type *</legend>
-          <label>
-            <input
-              type="radio"
-              name="query"
-              value="general"
-              checked={queryType === "general"}
-              onChange={(e) => setQueryType(e.target.value)}
-              required
-            />
-            General Enquiry
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="query"
-              value="support"
-              checked={queryType === "support"}
-              onChange={(e) => setQueryType(e.target.value)}
-              required
-            />
-            Support Request
-          </label>
-        </fieldset>
-
-        <section>
-          <label htmlFor="message">Message *</label>
-          <textarea
-            id="message"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            required
-          ></textarea>
-        </section>
-
-        <section className="checkbox-container">
-          <input
-            type="checkbox"
-            id="consent"
-            checked={consent}
-            onChange={(e) => setConsent(e.target.checked)}
-            required
-          />
-          <label htmlFor="consent">
-            I consent to being contacted by the team *
-          </label>
-        </section>
-
-        <button type="submit">Submit</button>
-      </form>
+      <Form
+        firstName={firstName}
+        lastName={lastName}
+        email={email}
+        queryType={queryType}
+        message={message}
+        consent={consent}
+        setFirstName={setFirstName}
+        setLastName={setLastName}
+        setEmail={setEmail}
+        setQueryType={setQueryType}
+        setMessage={setMessage}
+        setConsent={setConsent}
+        handleSubmit={handleSubmit}
+      />
     </main>
   );
 };
